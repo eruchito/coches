@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <header class="home-header">
+            <h1>Welcome to Auto Company</h1>
+            <p>Your one-stop shop for all your automotive needs.</p>
+        </header>
+
+        <section class="featured-cars">
+            <h2>Featured Cars</h2>
+            <div class="car-list">
+                {% for car in featured_cars %}
+                    <div class="car-item">
+                        <img src="{{ car.image.url }}" alt="{{ car.name }}" class="car-image">
+                        <h3>{{ car.name }}</h3>
+                        <p>Price: ${{ car.price }}</p>
+                        <a href="{% url 'car_detail' car.id %}" class="btn btn-primary">View Details</a>
+                        <a href="{% url 'add_to_cart' car.id %}" class="btn btn-success">Add to Cart</a>
+                    </div>
+                {% empty %}
+                    <p>No featured cars available at the moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="about">
+            <h2>About Us</h2>
+            <p>At Auto Company, we pride ourselves on offering the best cars at unbeatable prices. Our team is dedicated to ensuring you have a fantastic shopping experience.</p>
+        </section>
+
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <p>Have questions or need support? Feel free to <a href="{% url 'contact' %}">contact us</a>.</p>
+        </section>
+    </div>
+{% endblock %}
